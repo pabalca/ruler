@@ -1,5 +1,0 @@
-#!/bin/bash
-
-rm data.db
-FLASK_DEBUG=1 FLASK_APP=/Users/pabs/git/ruler/ruler/ flask initdb
-FLASK_DEBUG=1 FLASK_APP=/Users/pabs/git/ruler/ruler/ flask run

@@ -4,23 +4,18 @@ Trading rules aggregator.
 - Whitelist and filter autotraders.
 - Market link execution.
 
-## Run it. Create and populate db.
+## Run it: http://localhost:5000
 ```
-FLASK_DEBUG=1 FLASK_APP=/Users/pabs/git/invoices/invoices/ flask initdb
-FLASK_DEBUG=1 FLASK_APP=/Users/pabs/git/invoices/invoices/ flask scrape
-FLASK_DEBUG=1 FLASK_APP=/Users/pabs/git/invoices/invoices/ flask run
+./start
 ```
 
-## Definitions
-```
+## Definitions.
 Rule:
 - ticker
 - action
 - price
 - token
-```
-```
+
 Autotrader:
 - autotrader_id
 - name
-```
