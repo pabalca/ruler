@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if rules %}
+<div class="list-group">
+  {% for rule in rules %}
+    <div onclick="location.href='{{ url_for('index') }}';" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h6 class="mb-1">{{ rule.ticker }} : {{ rule.action }} {{ rule.price }}</h6>
+      <div>
+        <small>{{ rule.created_at }}</small>
+        <small><a href="{{ url_for('clear', rule_id=rule.id) }}">clear</a></small>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p>You have not saved any rule yet.</p>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function clipboard(data_id) {
+    var copyText = document.getElementById(data_id);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard
+      .writeText(copyText.value)
+//      .then(() => {
+//        alert("successfully copied");
+//      })
+//      .catch(() => {
+//        alert("something went wrong");
+//      });
+}
+</script>
+{% endblock %}
