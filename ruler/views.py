@@ -2,31 +2,9 @@ from flask import abort, flash, redirect, render_template, session, url_for, req
 from sqlalchemy import or_
 
 from ruler import app
-from ruler.decorators import login_required
 from ruler.models import User, Rule, AutoTrader, db
 from ruler.forms import RuleForm, AutoTraderForm, SearchForm
 import json
-
-
-@app.route("/login/", methods=["GET", "POST"])
-def login():
-    session["logged_in"] = False
-    form = LoginForm()
-    if form.validate_on_submit():
-        challenge = form.challenge.data
-        users = User.query.all()
-        for user in users:
-            if user.verify_password(challenge):
-                session["logged_in"] = True
-                session["user"] = user.id
-                return redirect(url_for("index"))
-    return render_template("login.html", form=form, session=session)
-
-
-@app.route("/logout")
-def logout():
-    session["logged_in"] = False
-    return redirect(url_for("login"))
 
 
 @app.route("/", methods=["GET", "POST"])

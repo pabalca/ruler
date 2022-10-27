@@ -21,6 +21,3 @@ class SearchForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
-class LoginForm(FlaskForm):
-    challenge = PasswordField("Challenge")
-    submit = SubmitField("Submit")

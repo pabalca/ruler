@@ -11,3 +11,16 @@ FLASK_DEBUG=1 FLASK_APP=/Users/pabs/git/invoices/invoices/ flask scrape
 FLASK_DEBUG=1 FLASK_APP=/Users/pabs/git/invoices/invoices/ flask run
 ```
 
+## Definitions
+```
+Rule:
+- ticker
+- action
+- price
+- token
+```
+```
+Autotrader:
+- autotrader_id
+- name
+```

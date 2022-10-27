@@ -23,19 +23,4 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-function clipboard(data_id) {
-    var copyText = document.getElementById(data_id);
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    navigator.clipboard
-      .writeText(copyText.value)
-//      .then(() => {
-//        alert("successfully copied");
-//      })
-//      .catch(() => {
-//        alert("something went wrong");
-//      });
-}
-</script>
 {% endblock %}
