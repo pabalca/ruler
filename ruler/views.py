@@ -2,8 +2,8 @@ from flask import abort, flash, redirect, render_template, session, url_for, req
 from sqlalchemy import or_
 
 from ruler import app
-from ruler.models import User, Rule, AutoTrader, db
-from ruler.forms import RuleForm, AutoTraderForm, SearchForm
+from ruler.models import User, Rule, AutoTrader, Symbol, db
+from ruler.forms import RuleForm, AutoTraderForm, SymbolForm, SearchForm
 import json
 
 
@@ -64,3 +64,17 @@ def autotrader():
         flash(f"Your autotrader <{a.id}> is saved.")
         return redirect(url_for("autotrader"))
     return render_template("autotrader.html", form=form, autotraders=autotraders)
+
+
+@app.route("/symbol", methods=["GET", "POST"])
+def symbol():
+    form = SymbolForm()
+    symbols = Symbol.query.order_by(Symbol.created_at.desc())
+    if form.validate_on_submit():
+        name = form.name.data
+        s = Symbol(name=name, price=0.)
+        db.session.add(s)
+        db.session.commit()
+        flash(f"Your symbol <{s.id}> is saved.")
+        return redirect(url_for("symbol"))
+    return render_template("symbol.html", form=form, symbols=symbols)

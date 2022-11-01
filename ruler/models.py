@@ -49,3 +49,13 @@ class AutoTrader(db.Model):
 
     def __repr__(self):
         return f"<AutoTrader> {self.name}"
+
+
+class Symbol(db.Model):
+    id = db.Column(db.String, primary_key=True, default=generate_uuid)
+    name = db.Column(db.String)
+    price = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"<Symbol> {self.name}"

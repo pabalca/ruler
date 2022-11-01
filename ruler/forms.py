@@ -16,6 +16,11 @@ class AutoTraderForm(FlaskForm):
     submit = SubmitField("Create")
 
 
+class SymbolForm(FlaskForm):
+    name = StringField("Symbol", validators=[DataRequired()])
+    submit = SubmitField("Create")
+
+
 class SearchForm(FlaskForm):
     search = StringField("Search")
     submit = SubmitField("Submit")
