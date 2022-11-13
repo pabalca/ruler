@@ -6,9 +6,6 @@ import logging
 
 class Alert:
     def __init__(self):
-        self.api = "https://api.telegram.org/"
-        self.token = "bot5639894858:AAHQqUs9rElHA1ns6vsWz0-esObpHM47OCg"
-        self.chat_id = "716400002"
 
 
     def send_message(self, message):
