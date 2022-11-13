@@ -1,13 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, FloatField, SubmitField
+from wtforms import PasswordField, StringField, FloatField, SubmitField, SelectField
 from wtforms.validators import DataRequired
+
+from ruler.models import Symbol
 
 
 class RuleForm(FlaskForm):
-    ticker = StringField("Ticker", validators=[DataRequired()])
-    action = StringField("Action", validators=[DataRequired()])
+    ticker = SelectField("Ticker", validators=[DataRequired()])
+    action = SelectField("Action", validators=[DataRequired()], choices=[("more_than","more than"), ("less_than","less than"), ("alert", "alert")])
     price = FloatField("Price", validators=[DataRequired()])
-    token = StringField("Token", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 

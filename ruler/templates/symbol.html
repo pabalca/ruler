@@ -6,15 +6,6 @@
 
 <h2>Symbols</h2>
 <hr>
-<form action="{{ url_for('symbol') }}" method="post">
-  {{ form.hidden_tag() }}
-  <div class="form-row align-items-center">
-    <div class="col-auto">{{ form['name'](class='form-control mb-2', placeholder="New symbol..") }}</div>
-    <div class="col-auto">{{ form['submit'](class='btn btn-success mb-2') }}</div>
-  </div>
-</form>
-
-<hr>
 
 <div class="list-group">
   {% for symbol in symbols %}
@@ -23,7 +14,7 @@
       <h5 class="mb-1">{{ symbol.name }}</h5>
       <small>{{ symbol.created_at }}</small>
     </div>
-    <small>{{ symbol.id }}</small>
+    <small>{{ symbol.price }}</small>
   {% endfor %}
   </a>
 </div>

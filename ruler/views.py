@@ -5,6 +5,7 @@ from ruler import app
 from ruler.models import User, Rule, AutoTrader, Symbol, db
 from ruler.forms import RuleForm, AutoTraderForm, SymbolForm, SearchForm
 import json
+from ruler.utils import Alert
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -22,23 +23,24 @@ def index():
 def rule():
     form = RuleForm()
     autotraders = AutoTrader.query.all()
+    form.ticker.choices = [ (symbol.name, symbol.name) for symbol in Symbol.query.all() ]
     if form.validate_on_submit():
         user = session.get("user")
-        token = session.get("token")
+        # token = session.get("token")
         ticker = form.ticker.data
         action = form.action.data
         price = form.price.data
-        token = form.token.data
+        # token = form.token.data
 
-        whitelist = [a.id for a in AutoTrader.query.all()]
-        if token not in whitelist:
-            flash("Not a valid token")
-            return render_template("rule.html", form=form)
+        # whitelist = [a.id for a in AutoTrader.query.all()]
+        # if token not in whitelist:
+        #     flash("Not a valid token")
+        #    return render_template("rule.html", form=form)
 
         r = Rule(ticker=ticker, action=action, price=price)
         db.session.add(r)
         db.session.commit()
-        flash(f"Your rule <{r.id}> is saved.")
+        # flash(f"Your rule <{r.id}> is saved.")
         return redirect(url_for("index"))
     return render_template("rule.html", form=form)
 
@@ -69,12 +71,6 @@ def autotrader():
 @app.route("/symbol", methods=["GET", "POST"])
 def symbol():
     form = SymbolForm()
-    symbols = Symbol.query.order_by(Symbol.created_at.desc())
-    if form.validate_on_submit():
-        name = form.name.data
-        s = Symbol(name=name, price=0.)
-        db.session.add(s)
-        db.session.commit()
-        flash(f"Your symbol <{s.id}> is saved.")
-        return redirect(url_for("symbol"))
-    return render_template("symbol.html", form=form, symbols=symbols)
+    symbols = Symbol.query.all()
+    return render_template("symbol.html", symbols=symbols)
+
