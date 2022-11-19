@@ -48,14 +48,16 @@ def check():
         alert = Alert()
         if action == "more_than" and symbol.price > price:
                 r = alert.send_message(f"{ticker} = {symbol.price}, alert more_than {price}")
+                rule.active = False
         elif action == "less_than" and symbol.price < price:
                 r = alert.send_message(f"{ticker} = {symbol.price}, alert less_than {price}")
+                rule.active = False
         elif action == "alert":
                 r= alert.send_message(f"Alert {ticker} = $ {symbol.price}")
+                rule.active = False
         else:
             click.echo(f"Error: {action} {symbol.price} {price}")
 
-        rule.active = False
         db.session.commit()
 
 
