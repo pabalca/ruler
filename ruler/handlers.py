@@ -1,7 +1,7 @@
 import click
 
 from ruler import app
-from ruler.models import User, Rule, Symbol, db
+from ruler.models import User, Rule, Symbol, Tick, db
 from ruler.utils import Alert
 import requests
 
@@ -76,5 +76,9 @@ def update():
 
     for symbol in symbols:
         s = Symbol(name=symbol[0], price=symbol[1])
+        # Save price history for btc and eth.
+        if symbol[0] in ("btc", "eth"):
+            t = Tick(symbol=symbol[0], price=symbol[1])
+            db.session.add(t)
         db.session.add(s)
     db.session.commit()

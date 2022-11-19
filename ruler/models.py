@@ -59,3 +59,13 @@ class Symbol(db.Model):
 
     def __repr__(self):
         return f"<Symbol> {self.name} $ {self.price}"
+
+
+class Tick(db.Model):
+    id = db.Column(db.String, primary_key=True, default=generate_uuid)
+    symbol = db.Column(db.String)
+    price = db.Column(db.Float)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"<Tick> {self.symbol} $ {self.price}"

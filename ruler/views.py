@@ -2,7 +2,7 @@ from flask import abort, flash, redirect, render_template, session, url_for, req
 from sqlalchemy import or_
 
 from ruler import app
-from ruler.models import User, Rule, AutoTrader, Symbol, db
+from ruler.models import User, Rule, AutoTrader, Symbol, Tick, db
 from ruler.forms import RuleForm, AutoTraderForm, SymbolForm, SearchForm
 import json
 from ruler.utils import Alert
@@ -74,3 +74,7 @@ def symbol():
     symbols = Symbol.query.all()
     return render_template("symbol.html", symbols=symbols)
 
+@app.route("/ticks/<symbol>", methods=["GET"])
+def ticks(symbol):
+    ticks = Tick.query.order_by(Tick.created_at.desc()).filter(Tick.symbol == symbol).all()
+    return render_template("ticks.html", ticks=ticks)
